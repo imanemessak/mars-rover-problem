@@ -2,10 +2,8 @@
 
 ## Goals
 
-The aim of this project is to solve the classic NASA Mars Rover kata using
-Python and Object-Oriented Programming principles. It demonstrates clean
-architecture (Single Responsibility), thorough test coverage, and a
-production-ready CI pipeline.
+The general aim is to solve the classic NASA Mars Rover kata using
+Python.
 
 ## Overview
 
