@@ -1,10 +1,39 @@
 {
-  "branches": ["main", "next"],
+  "branches": ["main"],
   "plugins": [
-    ["@semantic-release/commit-analyzer", { "preset": "conventionalcommits" }],
+    [
+      "@semantic-release/commit-analyzer",
+      {
+        "preset": "conventionalcommits",
+        "releaseRules": [
+          { "type": "feat", "release": "minor" },
+          { "type": "fix", "release": "patch" },
+          { "type": "perf", "release": "patch" },
+          { "type": "refactor", "release": "patch" },
+          { "type": "docs", "release": "patch" },
+          { "type": "ci", "release": "patch" },
+          { "type": "chore", "release": "patch" },
+          { "type": "test", "release": "patch" }
+        ]
+      }
+    ],
     [
       "@semantic-release/release-notes-generator",
-      { "preset": "conventionalcommits" }
+      {
+        "preset": "conventionalcommits",
+        "presetConfig": {
+          "types": [
+            { "type": "feat", "section": "✨ Features" },
+            { "type": "fix", "section": "🐛 Bug Fixes" },
+            { "type": "perf", "section": "⚡ Performance" },
+            { "type": "refactor", "section": "♻️ Refactoring" },
+            { "type": "docs", "section": "📚 Documentation" },
+            { "type": "ci", "section": "👷 CI/CD" },
+            { "type": "chore", "section": "🔧 Chores" },
+            { "type": "test", "section": "✅ Tests" }
+          ]
+        }
+      }
     ],
     [
       "@semantic-release/changelog",
@@ -16,8 +45,8 @@
     [
       "@semantic-release/git",
       {
-        "assets": ["CHANGELOG.md", "pyproject.toml"],
-        "message": "chore: Release ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+        "assets": ["CHANGELOG.md"],
+        "message": "chore(release): v${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
       }
     ]
   ]
