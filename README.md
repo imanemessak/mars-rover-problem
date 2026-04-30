@@ -29,7 +29,7 @@ Python.
 
 A squad of robotic rovers are landed by NASA on a rectangular plateau on Mars.
 The plateau is divided into a grid. Each rover's position is represented by
-`x y HEADING` — two integer coordinates and a cardinal direction
+`x y HEADING` , two integer coordinates and a cardinal direction
 (`N`, `E`, `S`, `W`).
 
 NASA controls each rover by sending a string of single-letter instructions:
@@ -41,7 +41,7 @@ NASA controls each rover by sending a string of single-letter instructions:
 | `M` | Move forward one grid point in the current heading |
 
 The square directly North of `(x, y)` is `(x, y+1)`. Rovers are deployed and
-executed **sequentially** — the second rover does not move until the first has
+executed **sequentially** , the second rover does not move until the first has
 finished.
 
 **Test Input:**
@@ -156,9 +156,9 @@ classDiagram
 
 ```
 src/mars_rover/
-├── plateau.py    # Plateau — grid boundary validation
-├── rover.py      # Rover   — movement & rotation logic
-├── mission.py    # Mission — input parsing & sequential orchestration
+├── plateau.py    # Plateau : grid boundary validation
+├── rover.py      # Rover   : movement & rotation logic
+├── mission.py    # Mission : input parsing & sequential orchestration
 └── __main__.py   # CLI entry point
 ```
 
@@ -262,12 +262,12 @@ Please see the [CONTRIBUTING](CONTRIBUTING.md) file.
 
 ## Contributor Code of Conduct
 
-Please note that this project is released with a
+Please note it is released with a
 [Contributor Code of Conduct](https://www.contributor-covenant.org/).
-By participating in this project you agree to abide by its terms.
+By participating you agree to abide by its terms.
 See [CODE_OF_CONDUCT](CODE_OF_CONDUCT.md).
 
-## Licence
+## License
 
 This work is licensed under a
 [Creative Commons Attribution-ShareAlike 4.0 International License][cc-by-sa].

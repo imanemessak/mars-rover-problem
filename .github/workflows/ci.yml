@@ -19,7 +19,7 @@ jobs:
         with:
           python-version: "3.12"
           cache: "pip"
-      - name: Install dependencies # ← was: pip install ruff
+      - name: Install dependencies
         run: pip install -e ".[dev]"
       - name: Lint
         run: ruff check src/ tests/
@@ -38,7 +38,7 @@ jobs:
         with:
           python-version: "3.12"
           cache: "pip"
-      - name: Install dependencies # ← was: pip install bandit safety
+      - name: Install dependencies
         run: pip install -e ".[dev]"
       - name: Bandit — static analysis
         run: bandit -c pyproject.toml -r src/
@@ -152,7 +152,7 @@ jobs:
           cache-to: type=gha,mode=max
 
   # ─────────────────────────────────────────────
-  # 📤 RELEASE — python-semantic-release
+  # 📤 RELEASE — semantic-release (JS) via .releaserc.json
   #    Only on push to main, after build passes
   # ─────────────────────────────────────────────
   release:
@@ -164,27 +164,36 @@ jobs:
       id-token: write
       contents: write
       issues: write
+      pull-requests: write
     steps:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
           token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: actions/setup-python@v5
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
-          python-version: "3.12"
-          cache: "pip"
-      - name: Install python-semantic-release
-        run: pip install python-semantic-release
+          node-version: "lts/*"
+
+      - name: Install semantic-release and plugins
+        run: |
+          npm install --no-save \
+            semantic-release \
+            @semantic-release/changelog \
+            @semantic-release/git \
+            @semantic-release/github \
+            @semantic-release/commit-analyzer \
+            @semantic-release/release-notes-generator \
+            conventional-changelog-conventionalcommits
+
       - name: Download build artifacts
         uses: actions/download-artifact@v4
         with:
           name: dist
           path: dist/
-      - name: Semantic Release
+
+      - name: Release
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          semantic-release version
-          semantic-release publish
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: npx semantic-release
