@@ -1,0 +1,24 @@
+{
+  "branches": ["main", "next"],
+  "plugins": [
+    ["@semantic-release/commit-analyzer", { "preset": "conventionalcommits" }],
+    [
+      "@semantic-release/release-notes-generator",
+      { "preset": "conventionalcommits" }
+    ],
+    [
+      "@semantic-release/changelog",
+      {
+        "changelogTitle": "# Changelog\n\nAll notable changes..."
+      }
+    ],
+    ["@semantic-release/github", {}],
+    [
+      "@semantic-release/git",
+      {
+        "assets": ["CHANGELOG.md", "pyproject.toml"],
+        "message": "chore: Release ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
+      }
+    ]
+  ]
+}
