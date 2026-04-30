@@ -11,7 +11,13 @@ requires-python = ">=3.10"
 license = { text = "MIT" }
 
 [project.optional-dependencies]
-dev = ["pytest", "pytest-cov", "ruff"]
+dev = [
+    "pytest",
+    "pytest-cov",
+    "ruff",
+    "bandit[toml]",   # [toml] extra allows bandit to read pyproject.toml config
+    "safety",
+]
 
 [project.scripts]
 mars-rover = "mars_rover.__main__:main"
@@ -29,6 +35,10 @@ target-version = "py311"
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP"]
+
+[tool.bandit]
+targets = ["src/"]
+skips = ["B101"] 
 
 [tool.semantic_release]
 version_toml          = ["pyproject.toml:project.version"]
