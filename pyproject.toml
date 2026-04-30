@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "mars-rover-problem"
-version = "0.1.0"
+version = "1.0.0"
 description = "NASA Mars Rover kata — Python OOP solution"
 readme = "README.md"
 requires-python = ">=3.10"
